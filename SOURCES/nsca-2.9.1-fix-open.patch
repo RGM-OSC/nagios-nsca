@@ -1,0 +1,11 @@
+--- src/nsca.c.orig	2015-09-28 14:55:06.000000000 +0200
++++ src/nsca.c	2015-09-28 14:58:41.296000290 +0200
+@@ -477,7 +477,7 @@
+                             int checkresult_test_fd=-1;
+                             char *checkresult_test=NULL;
+                             asprintf(&checkresult_test,"%s/nsca.test.%i",check_result_path,getpid());
+-                            checkresult_test_fd=open(checkresult_test,O_WRONLY|O_CREAT);
++                            checkresult_test_fd=open(checkresult_test,O_WRONLY|O_CREAT,0644);
+                             if (checkresult_test_fd>0){
+                                     unlink(checkresult_test);
+                                     }
