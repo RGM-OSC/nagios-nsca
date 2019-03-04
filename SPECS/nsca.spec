@@ -1,8 +1,8 @@
 %define name nsca
 %define version 2.9.1
-%define release 0.eon
+%define release 0.rgm
 %define nsusr nagios
-%define nsgrp eyesofnetwork
+%define nsgrp rgm
 %define nsport 5667
 # %define nsport 8086
 
@@ -16,7 +16,7 @@
 Summary: Host/service/network monitoring agent for Nagios
 URL: http://www.nagios.org
 Name: %{name}
-Version: %{version}
+Version: 2.9.1
 Release: %{release}
 License: GPL
 Group: Applications/System
@@ -110,19 +110,19 @@ CFLAGS="$RPM_OPT_FLAGS" CXXFLAGS="$RPM_OPT_FLAGS" \
 	--with-nsca-user=%{nsusr} \
 	--with-nsca-grp=%{nsgrp} \
 	--prefix=""        \
-	--bindir=/srv/eyesofnetwork/nagios/bin \
- 	--sysconfdir=/srv/eyesofnetwork/nagios/etc \
-	--localstatedir=/srv/eyesofnetwork/nagios/var/log \
+	--bindir=/srv/rgm/nagios/bin \
+ 	--sysconfdir=/srv/rgm/nagios/etc \
+	--localstatedir=/srv/rgm/nagios/var/log \
 
 make all
 
 %install
 [ "$RPM_BUILD_ROOT" != "/" ] && rm -rf $RPM_BUILD_ROOT
-install -b -D -m 0644 sample-config/nsca.cfg ${RPM_BUILD_ROOT}/srv/eyesofnetwork/nagios/etc/nsca.cfg
-install -b -D -m 0644 sample-config/send_nsca.cfg ${RPM_BUILD_ROOT}/srv/eyesofnetwork/nagios/etc/send_nsca.cfg
+install -b -D -m 0644 sample-config/nsca.cfg ${RPM_BUILD_ROOT}/srv/rgm/nagios/etc/nsca.cfg
+install -b -D -m 0644 sample-config/send_nsca.cfg ${RPM_BUILD_ROOT}/srv/rgm/nagios/etc/send_nsca.cfg
 install -b -D -m 0644 sample-config/nsca.xinetd ${RPM_BUILD_ROOT}/etc/xinetd.d/nsca
-install -b -D -m 0755 src/nsca ${RPM_BUILD_ROOT}/srv/eyesofnetwork/nagios/bin/nsca
-install -b -D -m 0755 src/send_nsca ${RPM_BUILD_ROOT}/srv/eyesofnetwork/nagios/bin/send_nsca
+install -b -D -m 0755 src/nsca ${RPM_BUILD_ROOT}/srv/rgm/nagios/bin/nsca
+install -b -D -m 0755 src/send_nsca ${RPM_BUILD_ROOT}/srv/rgm/nagios/bin/send_nsca
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -131,22 +131,25 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(755,root,root)
 /etc/xinetd.d/nsca
-/srv/eyesofnetwork/nagios/bin/nsca
-%dir /srv/eyesofnetwork/nagios/etc/
+/srv/rgm/nagios/bin/nsca
+%dir /srv/rgm/nagios/etc/
 %defattr(644,root,root)
-%config(noreplace) /srv/eyesofnetwork/nagios/etc/*.cfg
+%config(noreplace) /srv/rgm/nagios/etc/*.cfg
 %defattr(755,%{nsusr},%{nsgrp})
 %doc Changelog LEGAL README SECURITY
 
 %files send
 %defattr(755,root,root)
-/srv/eyesofnetwork/nagios/bin/send_nsca
+/srv/rgm/nagios/bin/send_nsca
 %defattr(644,root,root)
-%config(noreplace) /srv/eyesofnetwork/nagios/etc/send_nsca.cfg
+%config(noreplace) /srv/rgm/nagios/etc/send_nsca.cfg
 %defattr(755,%{nsusr},%{nsgrp})
 %doc Changelog LEGAL README SECURITY
 
 %changelog
+* Mon Mar 04 2019 Michael Aubertin <maubertin@fr.scc.com> - 2.9.1-0.rgm
+- Initial fork 
+
 * Tue Jan 13 2015 Jean-Philippe Levy <jeanphilippe.levy@gmail.com> - 2.9.1-0.eon
 - Upgrade to version 2.9.1
 
@@ -159,7 +162,7 @@ rm -rf $RPM_BUILD_ROOT
 * Mon Nov 23 2009 Jean-Philippe Levy <jeanphilippe.levy@gmail.com> - 2.7.2-0.eon 
 - First build for EyesOfNetwork 
 
-* Wed Jan 28 2004 Falk Höppner <fh at honix de>
+* Wed Jan 28 2004 Falk Hï¿½ppner <fh at honix de>
 - Create SPEC from nrpe.spec  
 - Tested on ia32/ia64 with SLES8/RHEL3
 
