@@ -1,6 +1,3 @@
-%define name nsca
-%define version 2.9.1
-%define release 0.rgm
 %define nsusr nagios
 %define nsgrp rgm
 %define nsport 5667
@@ -15,9 +12,9 @@
 
 Summary: Host/service/network monitoring agent for Nagios
 URL: http://www.nagios.org
-Name: %{name}
+Name: nsca
 Version: 2.9.1
-Release: %{release}
+Release: 0.rgm
 License: GPL
 Group: Applications/System
 Source0: %{name}-%{version}.tar.gz
